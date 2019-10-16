@@ -23,44 +23,44 @@
     text-shadow: 0px 0px 20px #bababa;
     filter: dropshadow(color=#bababa, offx=0, offy=0); }
 .button:hover{
-        padding:11px 32px;
-        border:none;
-        -webkit-border-radius:10px;
-        -moz-border-radius:10px;
-        border-radius: 4px;
-        font:22px Arial, Helvetica, sans-serif;
-        font-weight:bold;
-        color:#e5ffff;
-        background-color:#48bd48;
-        background-image: -moz-linear-gradient(top, #48bd48 0%, #359c35 100%);
-        background-image: -webkit-linear-gradient(top, #48bd48 0%, #359c35 100%);
-        background-image: -o-linear-gradient(top, #48bd48 0%, #359c35 100%);
-        background-image: -ms-linear-gradient(top, #48bd48 0% ,#359c35 100%);
-        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#359c35', endColorstr='#359c35',GradientType=0 );
-        background-image: linear-gradient(top, #48bd48 0% ,#359c35 100%);
-        -webkit-box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
-        -moz-box-shadow: 0px 0px 2px #bababa,  inset 0px 0px 1px #ffffff;
-        box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
+    padding:11px 32px;
+    border:none;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius: 4px;
+    font:22px Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    color:#e5ffff;
+    background-color:#48bd48;
+    background-image: -moz-linear-gradient(top, #48bd48 0%, #359c35 100%);
+    background-image: -webkit-linear-gradient(top, #48bd48 0%, #359c35 100%);
+    background-image: -o-linear-gradient(top, #48bd48 0%, #359c35 100%);
+    background-image: -ms-linear-gradient(top, #48bd48 0% ,#359c35 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#359c35', endColorstr='#359c35',GradientType=0 );
+    background-image: linear-gradient(top, #48bd48 0% ,#359c35 100%);
+    -webkit-box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
+    -moz-box-shadow: 0px 0px 2px #bababa,  inset 0px 0px 1px #ffffff;
+    box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
 
-    }
+}
 .button:active{
-         padding:11px 32px;
-         border:none;
-         -webkit-border-radius:10px;
-         -moz-border-radius:10px;
-         border-radius: 4px;
-         font:22px Arial, Helvetica, sans-serif;
-         font-weight:bold;
-         color:#e5ffff;
-         background-color:#82c782;
-         background-image: -moz-linear-gradient(top, #82c782 0%, #459945 100%);
-         background-image: -webkit-linear-gradient(top, #82c782 0%, #459945 100%);
-         background-image: -o-linear-gradient(top, #82c782 0%, #459945 100%);
-         background-image: -ms-linear-gradient(top, #82c782 0% ,#459945 100%);
-         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#459945', endColorstr='#459945',GradientType=0 );
-         background-image: linear-gradient(top, #82c782 0% ,#459945 100%);
-         -webkit-box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
-         -moz-box-shadow: 0px 0px 2px #bababa,  inset 0px 0px 1px #ffffff;
-         box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
+    padding:11px 32px;
+    border:none;
+    -webkit-border-radius:10px;
+    -moz-border-radius:10px;
+    border-radius: 4px;
+    font:22px Arial, Helvetica, sans-serif;
+    font-weight:bold;
+    color:#e5ffff;
+    background-color:#82c782;
+    background-image: -moz-linear-gradient(top, #82c782 0%, #459945 100%);
+    background-image: -webkit-linear-gradient(top, #82c782 0%, #459945 100%);
+    background-image: -o-linear-gradient(top, #82c782 0%, #459945 100%);
+    background-image: -ms-linear-gradient(top, #82c782 0% ,#459945 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#459945', endColorstr='#459945',GradientType=0 );
+    background-image: linear-gradient(top, #82c782 0% ,#459945 100%);
+    -webkit-box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
+    -moz-box-shadow: 0px 0px 2px #bababa,  inset 0px 0px 1px #ffffff;
+    box-shadow:0px 0px 2px #bababa, inset 0px 0px 1px #ffffff;
 
-     }
+}
