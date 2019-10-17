@@ -44,7 +44,6 @@
 
 .block {
     max-width: 400px;
-
 }
 
 h1 {
@@ -56,4 +55,11 @@ h1 {
     text-align: center;
 
     color: #006400;
+}
+
+.regLink {
+    display: block;
+    text-align: center;
+    color: darkolivegreen;
+    padding-top: 20px;
 }

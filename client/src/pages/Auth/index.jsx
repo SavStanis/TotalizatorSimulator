@@ -1,6 +1,7 @@
 import React from 'react';
 import "./Auth.css";
-import { Block, Button } from "../../components";
+import { Block, Button,AuthForm } from "../../components";
+import { Link, Route } from "react-router-dom";
 
 const Auth = () => (
     <div className="auth">
@@ -11,7 +12,8 @@ const Auth = () => (
             <div className="authContent">
                 <h1>Войдите в аккаунт</h1>
                 <Block>
-                    <Button>Войти</Button>
+                    <AuthForm login="" pswd=""/>
+                    <Link className="regLink" to="/register">Зарегистрироваться</Link>
                 </Block>
             </div>
         </div>
