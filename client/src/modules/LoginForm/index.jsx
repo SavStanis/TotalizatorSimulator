@@ -1,48 +1,44 @@
 import React, {Component} from 'react';
-import {Link, Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-import "./LoginForm.css"
+import "../styles/Form.css"
 import {Block, Button} from "../../components";
 
 class LoginForm extends Component {
     constructor(props) {
         super(props);
-        let login = "";
-        let loginValid = this.validateLogin(login);
+        let email = "";
+        let emailValid = this.validateEmail(email);
         let password = "";
         let passwordValid = this.validatePassword(password);
 
-        this.onLoginChange = this.onLoginChange.bind(this);
+        this.onEmailChange = this.onEmailChange.bind(this);
         this.onPasswordChange = this.onPasswordChange.bind(this);
 
         this.state = {
-            login: login,
+            email: email,
             password: password,
-            loginValid: loginValid,
+            emailValid: emailValid,
             passwordValid: passwordValid,
         };
     }
 
-    validateLogin(login) {
-        return login.length >= 4;
-    }
-    validatePassword(password) {
-        return password.length >=8;
-    }
+    validateEmail = email => (email.indexOf("@") !== -1);
+    validatePassword = password => (password.length >=8);
 
-    onLoginChange(e) {
-        let val = e.target.value;
-        let valid = this.validateLogin(val);
-        this.setState({login: val, loginValid: valid});
-    }
-    onPasswordChange(e) {
-        let val = e.target.value;
+    onEmailChange = (event) => {
+        let val = event.target.value;
+        let valid = this.validateEmail(val);
+        this.setState({email: val, emailValid: valid});
+    };
+    onPasswordChange = (event) => {
+        let val = event.target.value;
         let valid = this.validatePassword(val);
         this.setState({password: val, passwordValid: valid});
     }
 
     render() {
-        let loginColor = this.state.loginValid ? "green" : "red";
+        let emailColor = this.state.emailValid ? "green" : "red";
         let passwordColor = this.state.passwordValid ? "green" : "red";
 
         return (
@@ -54,9 +50,9 @@ class LoginForm extends Component {
                     <div className="authContent">
                         <h1>Войдите в аккаунт</h1>
                         <Block>
-                            <input type="text" className="authFormElem" placeholder="Login" value={this.state.login}
-                                   onChange={this.onLoginChange} style={{borderColor: loginColor}}/>
-                            <p></p>
+                            <input type="text" className="authFormElem" placeholder="Email" value={this.state.email}
+                                   onChange={this.onEmailChange} style={{borderColor: emailColor}}/>
+                            <p/>
                             <input type="password" className="authFormElem" placeholder="Password" value={this.state.password}
                                    onChange={this.onPasswordChange} style={{borderColor: passwordColor}}/>
                             <div className="submitButton">
