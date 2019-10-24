@@ -35,7 +35,7 @@ export default class RegisterForm extends Component {
             passwordValid: passwordValid,
             confirmPasswordValid: confirmPasswordValid,
 
-            redirectToLogin: false,
+            redirect: false,
             errors: {},
         };
     }
@@ -69,31 +69,35 @@ export default class RegisterForm extends Component {
     };
 
     handleSubmit = (event) => {
-        const email = encodeURIComponent(this.state.email);
-        const login = encodeURIComponent(this.state.email);
-        const password = encodeURIComponent(this.state.email);
-        const data = `email=${email}&login=${login}&password=${password}`;
-        axios({
-            method: 'post',
-            url: `${API_URL}`,
-            data: data
-        })
-            .then((response) => {
-            if (response.status === 200)
-                this.state.redirectToLogin = true;
-        })
-            .catch((error) => {
-                const errors = error.response.data.errors ? error.response.data.errors : {};
-                this.setState({errors});
+        event.preventDefault();
+
+        if(this.state.passwordValid && this.state.loginValid && this.state.emailValid && this.state.confirmPasswordValid) {
+
+            const email = encodeURIComponent(this.state.email);
+            const login = encodeURIComponent(this.state.login);
+            const password = encodeURIComponent(this.state.password);
+            const data = `email=${email}&login=${login}&password=${password}`;
+
+            axios.post(`${API_URL}/registration`, data)
+                .then((response) => {
+                // if (response.status === 200)
+                    console.log(response.data);
+                    this.setState({redirect: true});
+                })
+                .catch((error) => {
+                    const errors = error.response.data.errors ? error.response.data.errors : {};
+                    this.setState({errors});
             })
+        }
     };
 
     render() {
 
         if (checkToken())
-            return (<Redirect to='/'/>);
-        if(this.state.redirectToLogin)
-            return (<Redirect to='/login'/>)
+            return <Redirect to="/"/>;
+        const redirect = this.state.redirect;
+        if(redirect)
+            return <Redirect to="/login"/>;
 
         let errors = {
             loginError: "",
