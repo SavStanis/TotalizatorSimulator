@@ -11,9 +11,10 @@ const registerUser = (request, response) => {
 
     const {email, login, password} = request.body;
     User.findOne({email: email}).exec((err, user) => {
-        if(user)
-            return response.status(400).json({error: "This email is already registered!"});
-        else {
+        if(user) {
+            console.log("Someone's trying to register account using E-mail that's existed in db.");
+            return response.status(400).json({errors: {email: "This email is already registered!"}});
+        } else {
             const salt = randomstring.generate();
             const passwordHash  = crypto.createHash('sha256').update(password + salt).digest('base64');
             User.create({
@@ -21,12 +22,7 @@ const registerUser = (request, response) => {
                 login: login,
                 password: passwordHash,
                 salt: salt,
-            }).then(() => response.status(200).json({
-                email: email,
-                login: login,
-                password: passwordHash,
-                salt: salt,
-            }));
+            }).then(() => response.status(200).json({succes: true}));
         }
     });
 };

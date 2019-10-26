@@ -80,14 +80,31 @@ export default class RegisterForm extends Component {
 
             axios.post(`${API_URL}/registration`, data)
                 .then((response) => {
-                // if (response.status === 200)
-                    console.log(response.data);
+                    if (response.status === 200)
                     this.setState({redirect: true});
                 })
                 .catch((error) => {
                     const errors = error.response.data.errors ? error.response.data.errors : {};
                     this.setState({errors});
-            })
+                    if(this.state.errors.login)
+                        this.setState({
+                            login: "",
+                            loginValid: false,
+                        });
+                    if(this.state.errors.email)
+                        this.setState({
+                            email: "",
+                            emailValid: false,
+                        });
+                    if(this.state.errors.password)
+                        this.setState({
+                            password: "",
+                            confirmPassword: "",
+                            passwordValid: false,
+                            confirmPasswordValid: false,
+                        });
+
+        })
         }
     };
 
