@@ -43,9 +43,6 @@ class LoginForm extends Component {
 
         return (
             <form action="" className="authForm">
-                <div className="header">
-                    <div className="headerText">Totalizator Simulator</div>
-                </div>
                 <div className="authBlock">
                     <div className="authContent">
                         <h1>Войдите в аккаунт</h1>
@@ -58,7 +55,7 @@ class LoginForm extends Component {
                             <div className="submitButton">
                                 <Button>Войти</Button>
                             </div>
-                            <Link className="regLink" to="/register">Зарегистрироваться</Link>
+                            <Link className="regLink" to="/registration">Зарегистрироваться</Link>
                         </Block>
                     </div>
                 </div>

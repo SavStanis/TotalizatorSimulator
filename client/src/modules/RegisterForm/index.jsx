@@ -136,9 +136,6 @@ export default class RegisterForm extends Component {
 
         return (
             <form onSubmit={this.handleSubmit} className="authForm">
-                <div className="header">
-                    <div className="headerText">Totalizator Simulator</div>
-                </div>
                 <div className="authBlock">
                     <div className="authContent">
                         <h1>Регистрация аккаунта</h1>

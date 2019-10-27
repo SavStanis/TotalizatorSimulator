@@ -1,5 +1,5 @@
 /* header */
-.header {
+.mainPageHeader {
     position: absolute;
     width: 100%;
     height: 70px;
@@ -10,7 +10,7 @@
 }
 
 /* Totalizator Simulator */
-.headerText{
+.mainPageHeaderText{
     text-decoration: none;
     position: absolute;
     left: 30px;
@@ -25,4 +25,23 @@
     color: #9ACD32;
 
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.headerContent {
+    list-style-type: none;
+    margin-top: 2%;
+    margin-left: 80%;
+}
+
+li {
+    display: inline;
+    margin-left: 5% ;
+}
+
+.signIn {
+    background-color: #82c782;
+}
+.signUp {
+    background-color: #82c782;
+
 }
