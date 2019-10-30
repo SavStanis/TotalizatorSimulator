@@ -1,16 +1,17 @@
 import React from 'react';
-import "./Auth.css";
+import { Link, Route, Switch} from "react-router-dom";
 import {LoginForm, RegisterForm} from "../../modules";
-import {Link,Route, Switch} from "react-router-dom";
+import "./Auth.css";
 
 const Auth = () => (
     <div className="auth">
-        <div className="header"/>
+        <div className="header">
+            <Link className="headerText" to="/">Totalizator Simulator</Link>
+        </div>
         <Switch>
-            <Route exact path={"/login"} component={LoginForm}/>
-            <Route exact path={"/registration"} component={RegisterForm}/>
+            <Route  path="/login" component={LoginForm}/>
+            <Route  path="/registration" component={RegisterForm}/>
         </Switch>
-        <Link className="headerText" to="/">Totalizator Simulator</Link>
     </div>
 );
 

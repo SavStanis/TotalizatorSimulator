@@ -1,12 +1,13 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
+import {Link, Route, Switch} from 'react-router-dom';
 import {MainPageHeader} from "../../modules";
 import "./Main.css";
+import MainWindowHeader from "../../modules/MainPageHeader";
 
 const Main = () => {
     return (
         <div className="MainPage">
-            <MainPageHeader />
+            <MainWindowHeader/>
         </div>
     );
 };

@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import {Route} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import  { Auth, Main } from "./pages";
 
 class App extends Component {
     render() {
         return (
             <div className="wrapper">
-                <Route exact path={["/login", "/registration"]} component={Auth}/>
-                <Route exact path={"/"} component={Main}/>
+                <Switch>
+                    <Route exact path={"/"} component={Main}/>
+                    <Route path={["/login", "/registration"]} component={Auth}/>
+                </Switch>
             </div>
     );
     }
