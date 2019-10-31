@@ -21,6 +21,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/registration', auth.getAllUsers);
 app.post('/registration', auth.registerUser);
+
+//Tokenslogic
 app.post('/login', auth.signIn);
 app.get('/do', auth.userAuthentication, (request, response)=>{response.status(200).json({message: 'success'})});
 app.post('/refresh-tokens', tokensMethods.refreshTokens);

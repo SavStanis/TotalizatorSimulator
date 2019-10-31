@@ -36,7 +36,7 @@ const signIn = async (request, response) => {
     const salt = user.salt;
     if(crypto.createHash('sha256').update(password + salt).digest('base64') !== user.passwordHash)
         return response.status(400).json({error: 'Wrong password!'});
-    const tokens = tokenMethods.updateTokens(user._id);
+    const tokens = await tokenMethods.updateTokens(user._id);
     response.status(200).json(tokens);
 };
 
@@ -51,7 +51,6 @@ const userAuthentication = (request, response, next) => {
     } catch (e) {
         return response.status(400).json({error: 'Invalid token!'});
     }
-    console.log(payload);
     if(payload.type !== 'access')
         return response.status(400).json({error: 'Invalid token!'});
 
