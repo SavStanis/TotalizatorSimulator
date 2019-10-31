@@ -7,11 +7,13 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "morgan": "latest",
-    "http-errors": "^1.7.3",
     "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "latest",
-    "randomstring": "latest"
+    "morgan": "latest",
+    "randomstring": "latest",
+    "uuid": "^3.3.3"
   }
 }

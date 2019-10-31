@@ -1,11 +1,9 @@
-const crypto = require('crypto');
 const randomstring = require('randomstring');
-const mongoose = require('mongoose');
-const config = require('../config/app');
 const User = require('../models/user');
-
-mongoose.connect(config.MONGODB_URI + "/totalizator-simulator", { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("MongoDB connected!")).catch(err => console.log(err));
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const TOKEN_SECRET = require('../config/app').jwtConfig.TOKEN_SECRET;
+const tokenMethods = require('./tokensMethods');
 
 const registerUser = async (request, response) => {
     const {email, login, password} = request.body;
@@ -19,7 +17,7 @@ const registerUser = async (request, response) => {
     User.create({
         email: email,
         login: login,
-        password: passwordHash,
+        passwordHash: passwordHash,
         salt: salt,
     });
     response.status(200).json({success: true});
@@ -30,4 +28,34 @@ const getAllUsers = async (request, response) => {
     response.status(200).json(users);
 };
 
-module.exports = {registerUser, getAllUsers};
+const signIn = async (request, response) => {
+    const {email, password} = request.body;
+    const user = await User.findOne({email: email});
+    if(!user)
+        return response.status(400).json({error: 'Wrong email!'});
+    const salt = user.salt;
+    if(crypto.createHash('sha256').update(password + salt).digest('base64') !== user.passwordHash)
+        return response.status(400).json({error: 'Wrong password!'});
+    const tokens = tokenMethods.updateTokens(user._id);
+    response.status(200).json(tokens);
+};
+
+const userAuthentication = (request, response, next) => {
+    const userToken = request.get('Authentication').replace('Bearer ', '');
+    if(!userToken) {
+        return response.status(401).json({error: 'Token is not provided!'});
+    }
+    let payload;
+    try {
+        payload = jwt.verify(userToken, TOKEN_SECRET);
+    } catch (e) {
+        return response.status(400).json({error: 'Invalid token!'});
+    }
+    console.log(payload);
+    if(payload.type !== 'access')
+        return response.status(400).json({error: 'Invalid token!'});
+
+    next();
+};
+
+module.exports = {registerUser, getAllUsers, signIn, userAuthentication};
