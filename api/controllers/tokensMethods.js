@@ -47,7 +47,7 @@ const updateTokens = async (userID) => {
 };
 
 const refreshTokens = async (request, response) => {
-  const refreshToken = request.body.refreshToken;;
+  const refreshToken = request.body.refreshToken;
   let payload;
   try {
       payload = jwt.verify(refreshToken, jwtConfig.TOKEN_SECRET);

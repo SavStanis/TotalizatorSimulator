@@ -5,7 +5,7 @@ import axios from 'axios';
 import "../styles/Form.css"
 
 import {Block, Button} from "../../components";
-import {checkToken} from "../AuthFunctions";
+import {getAccessToken} from "../AuthFunctions";
 import {API_URL} from "../../config";
 
 export default class RegisterForm extends Component {
@@ -110,7 +110,7 @@ export default class RegisterForm extends Component {
 
     render() {
 
-        if (checkToken())
+        if (getAccessToken())
             return <Redirect to="/"/>;
         const redirect = this.state.redirect;
         if(redirect)

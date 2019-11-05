@@ -53,7 +53,6 @@ const userAuthentication = (request, response, next) => {
     }
     if(payload.type !== 'access')
         return response.status(400).json({error: 'Invalid token!'});
-
     next();
 };
 

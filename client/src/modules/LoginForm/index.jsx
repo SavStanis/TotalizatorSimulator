@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import axios from 'axios';
 
 import "../styles/Form.css"
 import {Block, Button} from "../../components";
+import {getAccessToken, setAccessToken, setRefreshToken} from "../AuthFunctions";
+import {API_URL} from "../../config";
 
 class LoginForm extends Component {
     constructor(props) {
@@ -20,6 +23,7 @@ class LoginForm extends Component {
             password: password,
             emailValid: emailValid,
             passwordValid: passwordValid,
+            redirect: false,
         };
     }
 
@@ -35,14 +39,37 @@ class LoginForm extends Component {
         let val = event.target.value;
         let valid = this.validatePassword(val);
         this.setState({password: val, passwordValid: valid});
-    }
+    };
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+
+        if(this.state.emailValid && this.state.passwordValid) {
+            const email = encodeURIComponent(this.state.email);
+            const password = encodeURIComponent(this.state.password);
+            const data = `email=${email}&password=${password}`;
+            axios.post(`${API_URL}/login`, data)
+                .then(response => {
+                    if(response.status === 200) {
+                       setAccessToken(response.data.accessToken);
+                       setRefreshToken(response.data.refreshToken);
+                       this.setState({redirect: true});
+                    }
+                })
+        }
+    };
 
     render() {
+
+        if(getAccessToken() || this.state.redirect) {
+           return <Redirect to="/"/>;
+        }
+
         let emailColor = this.state.emailValid ? "green" : "red";
         let passwordColor = this.state.passwordValid ? "green" : "red";
 
         return (
-            <form action="" className="authForm">
+            <form onSubmit={this.handleSubmit} action="" className="authForm">
                 <div className="authBlock">
                     <div className="authContent">
                         <h1>Войдите в аккаунт</h1>

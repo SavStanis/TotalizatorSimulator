@@ -29,6 +29,6 @@ app.post('/refresh-tokens', tokensMethods.refreshTokens);
 app.get('/tokens', async (request, response) => {
     const tokens = await Token.find();
     response.status(200).json(tokens);
-})
+});
 
 app.listen(config.API_PORT);
