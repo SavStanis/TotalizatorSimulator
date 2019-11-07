@@ -24,6 +24,8 @@ class LoginForm extends Component {
             emailValid: emailValid,
             passwordValid: passwordValid,
             redirect: false,
+
+            errors: {},
         };
     }
 
@@ -48,7 +50,7 @@ class LoginForm extends Component {
             const email = encodeURIComponent(this.state.email);
             const password = encodeURIComponent(this.state.password);
             const data = `email=${email}&password=${password}`;
-            axios.post(`${API_URL}/login`, data)
+            axios.post(`${API_URL}/user/login`, data)
                 .then(response => {
                     if(response.status === 200) {
                        setAccessToken(response.data.accessToken);
@@ -56,15 +58,34 @@ class LoginForm extends Component {
                        this.setState({redirect: true});
                     }
                 })
+                .catch(error => {
+                    const errors = error.response.data.errors ? error.response.data.errors : {};
+                    this.setState({errors});
+                    if (this.state.errors) {
+                        this.setState({
+                                email: "",
+                                password: "",
+                                emailValid: false,
+                                passwordValid: false,
+                            }
+                        )
+                    }
+                })
         }
     };
 
     render() {
 
+        let error = "";
+
         if(getAccessToken() || this.state.redirect) {
            return <Redirect to="/"/>;
         }
 
+        if(this.state.errors)
+        {
+            error = this.state.errors.message;
+        }
         let emailColor = this.state.emailValid ? "green" : "red";
         let passwordColor = this.state.passwordValid ? "green" : "red";
 
@@ -79,6 +100,7 @@ class LoginForm extends Component {
                             <p/>
                             <input type="password" className="authFormElem" placeholder="Password" value={this.state.password}
                                    onChange={this.onPasswordChange} style={{borderColor: passwordColor}}/>
+                            <p className="error">{error}</p>
                             <div className="submitButton">
                                 <Button>Войти</Button>
                             </div>

@@ -78,7 +78,7 @@ export default class RegisterForm extends Component {
             const password = encodeURIComponent(this.state.password);
             const data = `email=${email}&login=${login}&password=${password}`;
 
-            axios.post(`${API_URL}/registration`, data)
+            axios.post(`${API_URL}/user/registration`, data)
                 .then((response) => {
                     if (response.status === 200)
                         this.setState({redirect: true});

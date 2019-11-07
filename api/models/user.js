@@ -5,6 +5,7 @@ const UserSchema = new mongoose.Schema({
     login: String,
     passwordHash: String,
     salt: String,
+    moneyAmount: Number,
 });
 
 module.exports = mongoose.model('User', UserSchema);
