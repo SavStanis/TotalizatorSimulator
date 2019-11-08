@@ -34,4 +34,18 @@ const deleteUserByID = async (request, response) => {
     response.status(200).json({message: "User deleted"});
 };
 
-module.exports = {registerUser, getAllUsers, deleteUserByID};
+const balanceReplenishment = async (request, response) => {
+    const {userID, moneyAmount} = request.body;
+    const user = await User.findById(userID);
+    if(!user) {
+        return response.status(400).json({message: "User is not existed!"});
+    }
+    if(moneyAmount <= 0) {
+        return response.status(400).json({message: "Invalid money amount!"});
+    }
+    const newAmount = moneyAmount + user.moneyAmount;
+    await User.findByIdAndUpdate(userID, {moneyAmount: newAmount});
+    response.status(200).json({message: "success"});
+};
+
+module.exports = {registerUser, getAllUsers, deleteUserByID, balanceReplenishment};

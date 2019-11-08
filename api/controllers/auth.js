@@ -17,7 +17,7 @@ const signIn = async (request, response) => {
 };
 
 const userAuthentication = (request, response, next) => {
-    let userToken = request.get('Authentication');
+    let userToken = request.get('Authorization');
     if(!userToken) {
         return response.status(401).json({error: 'Token is not provided!'});
     }
