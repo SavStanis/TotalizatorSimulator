@@ -6,8 +6,8 @@ const betEventSchema = new mongoose.Schema({
     answer2: String,
     coefficient1: Number,
     coefficient2: Number,
-    Amount1: Number,
-    Amount2: Number,
+    amount1: Number,
+    amount2: Number,
 });
 
 module.exports= mongoose.model('betEvent', betEventSchema);
