@@ -18,6 +18,7 @@ const registerUser = async (request, response) => {
         passwordHash: passwordHash,
         salt: salt,
         moneyAmount: 0,
+        isAdmin: false,
     });
     response.status(200).json({success: true});
 };

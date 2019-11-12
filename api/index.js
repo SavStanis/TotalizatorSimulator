@@ -37,14 +37,14 @@ app.delete('/user/delete', auth.userAuthentication, userMethods.deleteUserByID);
 app.post('/user/balance-replenishment', auth.userAuthentication, userMethods.balanceReplenishment);
 
 //token logic
-app.get('/do', auth.userAuthentication, (request, response) => {response.status(200).json({message: 'success'})});
+app.get('/do', auth.userAuthentication, auth.adminAuthentication, (request, response) => {response.status(200).json({message: 'success'})});
 app.post('/refresh-tokens', tokensMethods.refreshTokens);
 
 //bet event logic
 //TODO:: introduce admin check before
 app.post('/event/create', betEventMethods.createBetEvent);
 app.get('/event/get-events', betEventMethods.getAllEvents);
-
+app.delete('/event/finish-event', betEventMethods.finishBetEvent);
 //bet logic
 app.post('/bet/make-a-bet', auth.userAuthentication, betMethods.createBet);
 

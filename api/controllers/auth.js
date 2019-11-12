@@ -34,4 +34,14 @@ const userAuthentication = (request, response, next) => {
     next();
 };
 
-module.exports = {signIn, userAuthentication};
+const adminAuthentication = (request, response, next) => {
+    let userToken = request.get('Authorization');
+    userToken = userToken.replace('Bearer ', '');
+    let payload = jwt.verify(userToken, TOKEN_SECRET);
+    if(!payload.isAdmin) {
+        return response.status(403).json({error: 'Permisson denied!'});
+    }
+    next();
+};
+
+module.exports = {signIn, userAuthentication, adminAuthentication};

@@ -1,13 +1,17 @@
 const jwt = require('jsonwebtoken');
-const Token = require('../models/token');
 const uuid = require('uuid/v4');
 const jwtConfig = require('../config/app').jwtConfig;
 
-const createAccessToken = (userID) => {
+const Token = require('../models/token');
+const User = require('../models/user');
+
+const createAccessToken = async (userID) => {
+    const user = await User.findById(userID);
+    const isAdmin = user.isAdmin;
     const payload = {
         userID: userID,
         type: jwtConfig.accessToken.type,
-        isAdmin: false,
+        isAdmin: isAdmin,
     };
     const options = {expiresIn: jwtConfig.accessToken.expiresIn};
     return jwt.sign(payload, jwtConfig.TOKEN_SECRET, options);
@@ -37,7 +41,7 @@ const updateDB = async (userID, tokenID) => {
 };
 
 const updateTokens = async (userID) => {
-    const accessToken = createAccessToken(userID);
+    const accessToken = await createAccessToken(userID);
     const refreshToken = createRefreshToken();
     await updateDB(userID, refreshToken.tokenID);
     return {

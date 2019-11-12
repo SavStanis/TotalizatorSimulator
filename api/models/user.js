@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema({
     passwordHash: String,
     salt: String,
     moneyAmount: Number,
+    isAdmin: Boolean,
 });
 
 module.exports = mongoose.model('User', UserSchema);
