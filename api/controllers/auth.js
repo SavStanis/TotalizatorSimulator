@@ -6,6 +6,8 @@ const tokenMethods = require('./tokensMethods');
 
 const signIn = async (request, response) => {
     const {email, password} = request.body;
+    if(!email || !password)
+        return response.status(400).json({message: 'Invalid request!'});
     const user = await User.findOne({email: email});
     if(!user)
         return response.status(400).json({errors: {message: 'Wrong email!'}});

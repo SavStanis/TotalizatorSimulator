@@ -7,8 +7,11 @@ const registerUser = async (request, response) => {
     const {email, login, password} = request.body;
     const user = await User.findOne({email: email});
     if(user) {
-        console.log("Someone's trying to register account using E-mail that's existed in db.");
+        //console.log("Someone's trying to register account using E-mail that's existed in db.");
         return response.status(400).json({errors: {email: "This email is already registered!"}});
+    }
+    if(!email || !login || !password) {
+        return response.status(400).json({message: 'Invalid request'});
     }
     const salt = randomstring.generate();
     const passwordHash = crypto.createHash('sha256').update(password + salt).digest('base64');
@@ -20,7 +23,7 @@ const registerUser = async (request, response) => {
         moneyAmount: 0,
         isAdmin: false,
     });
-    response.status(200).json({success: true});
+    response.status(200).json({message: 'success'});
 };
 
 const getAllUsers = async (request, response) => {

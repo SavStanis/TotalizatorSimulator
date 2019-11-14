@@ -11,5 +11,6 @@ module.exports = {
             type: 'refresh',
             expiresIn: '2 days',
         }
-    }
+    },
+    COMMISSION: 0.05,
 };

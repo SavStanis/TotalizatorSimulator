@@ -35,7 +35,6 @@ const createBet = async (request, responce) => {
     });
     const newAmount = user.moneyAmount - betAmount;
     await User.findByIdAndUpdate(userID,{moneyAmount: newAmount});
-    console.log("EventID " + eventID);
     await betEventMethods.updateBetEvent(eventID, answerNumber, betAmount);
     responce.status(200).json({message: "success"});
 };
