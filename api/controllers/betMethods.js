@@ -44,8 +44,29 @@ const getAllBets = async (request, response) => {
     response.status(200).json(bets);
 };
 
+const getBetsByUserID = async (request, response) => {
+  const {userID} = request.body;
+  const bets = await Bet.find({userID: userID});
+  const responseBets = [];
+  for(const bet of bets) {
+      const betEventID = bet.betEventID;
+      const event = await BetEvent.findById(betEventID);
+      const eventQuestion = event.question;
+      const answer = (bet.answerNumber === 1) ? event.answer1 : event.answer2;
+      const coefficient = (bet.answerNumber === 1) ? event.coefficient1 : event.coefficient2;
+      const betAmount = bet.betAmount;
+      responseBets.push({
+          question: eventQuestion,
+          answer: answer,
+          coefficient: coefficient,
+          betAmount: betAmount
+      });
+  }
+  response.status(200).json(responseBets);
+};
+
 const deleteBetsByBetEventID = async (betEventID) => {
     await Bet.remove({betEventID: betEventID});
 };
 
-module.exports = {createBet, getAllBets, deleteBetsByBetEventID};
+module.exports = {createBet, getAllBets, deleteBetsByBetEventID, getBetsByUserID};

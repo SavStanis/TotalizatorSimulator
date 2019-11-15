@@ -52,4 +52,18 @@ const balanceReplenishment = async (request, response) => {
     response.status(200).json({message: "success"});
 };
 
-module.exports = {registerUser, getAllUsers, deleteUserByID, balanceReplenishment};
+const getInfo = async (request, response) => {
+    const {userID} = request.body;
+    const user = await User.findById(userID);
+    if(!user) {
+        return response.status(400).json({message: "User is not existed!"});
+    }
+    const info = {
+        email: user.email,
+        login: user.login,
+        moneyAmount: user.moneyAmount
+    };
+    response.status(200).json(info);
+};
+
+module.exports = {registerUser, getAllUsers, deleteUserByID, balanceReplenishment, getInfo};

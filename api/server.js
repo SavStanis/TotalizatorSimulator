@@ -5,49 +5,27 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const config = require('./config/app');
-const auth = require('./controllers/auth');
-const userMethods = require('./controllers/userMethods');
-const tokensMethods = require('./controllers/tokensMethods');
-const betEventMethods = require('./controllers/betEventMethods');
-const betMethods = require('./controllers/betMethods');
-const Token = require('./models/token');
+const routesUser = require('./routes/user');
+const routesBetEvent = require('./routes/betEvent');
+const routesBet = require('./routes/bet');
 
 const app = express();
 
 mongoose.connect(config.MONGODB_URI + "/totalizator-simulator", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false})
-    .then().catch(err => console.log(err));
+    .then()
+    .catch(err => console.log(err));
 
-//app.use(logger('dev'));
-
+app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-//debug requests
-app.get('/get-all-users', userMethods.getAllUsers);
-app.get('/get-all-rtokens', async (request, response) => {
-    const tokens = await Token.find();
-    response.status(200).json(tokens);
-});
-app.get('/bet/get-all-bets', betMethods.getAllBets);
-
 //user logic
-app.post('/user/registration', userMethods.registerUser);
-app.post('/user/login', auth.signIn);
-app.delete('/user/delete', auth.userAuthentication, userMethods.deleteUserByID);
-app.post('/user/balance-replenishment', auth.userAuthentication, userMethods.balanceReplenishment);
-
-//token logic
-app.get('/do', auth.userAuthentication, auth.adminAuthentication, (request, response) => {response.status(200).json({message: 'success'})});
-app.post('/refresh-tokens', tokensMethods.refreshTokens);
-
+app.use('/user', routesUser);
 //bet event logic
-app.post('/event/create', auth.adminAuthentication, betEventMethods.createBetEvent);
-app.get('/event/get-events', betEventMethods.getAllEvents);
-app.delete('/event/finish-event', auth.adminAuthentication, betEventMethods.finishBetEvent);
-
+app.use('/event', routesBetEvent);
 //bet logic
-app.post('/bet/make-a-bet', auth.userAuthentication, betMethods.createBet);
+app.use('/bet', routesBet);
 
 app.listen(config.API_PORT);
 
