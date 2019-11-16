@@ -3,7 +3,7 @@ import {Link, Redirect} from 'react-router-dom';
 import axios from 'axios';
 
 import "../styles/Form.css"
-import {Block, Button} from "../../components";
+import {Button} from "../../components";
 import {getAccessToken, setAccessToken, setRefreshToken} from "../AuthFunctions";
 import {API_URL} from "../../config";
 
@@ -76,39 +76,29 @@ class LoginForm extends Component {
 
     render() {
 
-        let error = "";
-
         if(getAccessToken() || this.state.redirect) {
            return <Redirect to="/"/>;
         }
 
-        if(this.state.errors)
-        {
-            error = this.state.errors.message;
-        }
         let emailColor = this.state.emailValid ? "green" : "red";
         let passwordColor = this.state.passwordValid ? "green" : "red";
 
         return (
-            <form onSubmit={this.handleSubmit} action="" className="authForm">
-                <div className="authBlock">
-                    <div className="authContent">
-                        <h1>Войдите в аккаунт</h1>
-                        <Block>
-                            <input type="text" className="authFormElem" placeholder="Email" value={this.state.email}
-                                   onChange={this.onEmailChange} style={{borderColor: emailColor}}/>
-                            <p/>
-                            <input type="password" className="authFormElem" placeholder="Password" value={this.state.password}
-                                   onChange={this.onPasswordChange} style={{borderColor: passwordColor}}/>
-                            <p className="error">{error}</p>
-                            <div className="submitButton">
-                                <Button>Войти</Button>
-                            </div>
-                            <Link className="regLink" to="/registration">Зарегистрироваться</Link>
-                        </Block>
+            <div className="authContent">
+                <h1>Войдите в аккаунт</h1>
+                <form onSubmit={this.handleSubmit} action="" className="authForm">
+                    <input type="text" className="authFormElem" placeholder="Email" value={this.state.email}
+                           onChange={this.onEmailChange} style={{borderColor: emailColor}}/>
+                    <p className="error">{this.state.errors.email}</p>
+                    <input type="password" className="authFormElem" placeholder="Password" value={this.state.password}
+                           onChange={this.onPasswordChange} style={{borderColor: passwordColor}}/>
+                    <p className="error">{this.state.errors.password}</p>
+                    <div className="submitButton">
+                        <Button>Войти</Button>
                     </div>
-                </div>
-            </form>
+                    <Link className="authLink" to="/registration">Зарегистрироваться</Link>
+                </form>
+            </div>
         );
     }
 }

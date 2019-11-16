@@ -10,10 +10,10 @@ const signIn = async (request, response) => {
         return response.status(400).json({message: 'Invalid request!'});
     const user = await User.findOne({email: email});
     if(!user)
-        return response.status(400).json({errors: {message: 'Wrong email!'}});
+        return response.status(400).json({errors: {email: 'Wrong email!'}});
     const salt = user.salt;
     if(crypto.createHash('sha256').update(password + salt).digest('base64') !== user.passwordHash)
-        return response.status(400).json({errors: {message: 'Wrong password!'}});
+        return response.status(400).json({errors: {password: 'Wrong password!'}});
     const tokens = await tokenMethods.updateTokens(user._id);
     response.status(200).json(tokens);
 };
