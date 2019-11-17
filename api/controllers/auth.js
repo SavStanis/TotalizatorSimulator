@@ -15,7 +15,12 @@ const signIn = async (request, response) => {
     if(crypto.createHash('sha256').update(password + salt).digest('base64') !== user.passwordHash)
         return response.status(400).json({errors: {password: 'Wrong password!'}});
     const tokens = await tokenMethods.updateTokens(user._id);
-    response.status(200).json(tokens);
+    response.status(200).json({
+        accessToken: tokens.accessToken,
+        refreshToken: tokens.refreshToken,
+        login: user.login,
+        email: user.email
+    });
 };
 
 const userAuthentication = (request, response, next) => {

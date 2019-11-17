@@ -17,11 +17,14 @@ const PageHeader = (props) => {
         const logOutHandler = () => {
           deleteAccessToken();
           deleteRefreshToken();
+          localStorage.removeItem('login');
+          localStorage.removeItem('email');
         };
         return (
             <div className="pageHeader">
                 <div className="pageHeaderText">Totalizator Simulator</div>
-                <Link className="signUp" onClick={logOutHandler} to="/">Sign out</Link>
+                <Link className="info" to="/user">{localStorage.getItem('login')}</Link>
+                <Link className="signOut" onClick={logOutHandler} to="/">Sign out</Link>
             </div>
         )
     }

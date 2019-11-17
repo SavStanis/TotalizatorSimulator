@@ -47,7 +47,7 @@ const balanceReplenishment = async (request, response) => {
     if(moneyAmount <= 0) {
         return response.status(400).json({message: "Invalid money amount!"});
     }
-    const newAmount = moneyAmount + user.moneyAmount;
+    const newAmount = parseInt(moneyAmount) + user.moneyAmount;
     await User.findByIdAndUpdate(userID, {moneyAmount: newAmount});
     response.status(200).json({message: "success"});
 };
@@ -58,12 +58,12 @@ const getInfo = async (request, response) => {
     if(!user) {
         return response.status(400).json({message: "User is not existed!"});
     }
-    const info = {
+    const userData = {
         email: user.email,
         login: user.login,
         moneyAmount: user.moneyAmount
     };
-    response.status(200).json(info);
+    response.status(200).json(userData);
 };
 
 module.exports = {registerUser, getAllUsers, deleteUserByID, balanceReplenishment, getInfo};

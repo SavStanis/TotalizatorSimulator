@@ -1,0 +1,47 @@
+.userContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.labelContainer {
+    padding: 20px;
+    background-color: #d6fccf;
+    border: 2px solid #2e7346;
+    border-radius: 10px;
+}
+
+.infoLabel {
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 47px;
+
+    color: #2e7346;
+}
+.infoButtons {
+    display: flex;
+    padding-top: 30px;
+    width: 420px;
+    justify-content: center;
+
+}
+.infoLink {
+    padding: 20px;
+    margin: 10px;
+    flex-grow: 0;
+
+    padding: 10px;
+    flex-grow: 1;
+    border: solid 1px;
+    border-radius: 5px;
+
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: Roboto Slab;
+    font-weight: bold;
+    background-color: #d6fccf;
+    color: #2e7346;
+}

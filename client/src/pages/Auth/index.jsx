@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import {LoginForm, RegisterForm, PageHeader} from "../../modules";
-import "./Auth.css";
 
 const Auth = () => (
     <div className="auth">

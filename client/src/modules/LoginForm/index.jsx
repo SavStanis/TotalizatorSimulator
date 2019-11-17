@@ -47,25 +47,35 @@ class LoginForm extends Component {
         event.preventDefault();
 
         if(this.state.emailValid && this.state.passwordValid) {
-            const email = encodeURIComponent(this.state.email);
-            const password = encodeURIComponent(this.state.password);
-            const data = `email=${email}&password=${password}`;
+            const data = {
+              email: this.state.email,
+              password: this.state.password
+            };
             axios.post(`${API_URL}/user/login`, data)
                 .then(response => {
                     if(response.status === 200) {
                        setAccessToken(response.data.accessToken);
                        setRefreshToken(response.data.refreshToken);
+                       localStorage.setItem('login', response.data.login);
+                       localStorage.setItem('email', response.data.email);
                        this.setState({redirect: true});
                     }
                 })
                 .catch(error => {
                     const errors = error.response.data.errors ? error.response.data.errors : {};
                     this.setState({errors});
-                    if (this.state.errors) {
+                    if (this.state.errors.email) {
                         this.setState({
                                 email: "",
                                 password: "",
                                 emailValid: false,
+                                passwordValid: false,
+                            }
+                        )
+                    }
+                    if (this.state.errors.password) {
+                        this.setState({
+                                password: "",
                                 passwordValid: false,
                             }
                         )

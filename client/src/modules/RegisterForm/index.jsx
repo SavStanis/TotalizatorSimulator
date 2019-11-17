@@ -72,11 +72,11 @@ export default class RegisterForm extends Component {
         event.preventDefault();
 
         if(this.state.passwordValid && this.state.loginValid && this.state.emailValid && this.state.confirmPasswordValid) {
-
-            const email = encodeURIComponent(this.state.email);
-            const login = encodeURIComponent(this.state.login);
-            const password = encodeURIComponent(this.state.password);
-            const data = `email=${email}&login=${login}&password=${password}`;
+            const data = {
+                email: this.state.email,
+                login: this.state.login,
+                password: this.state.password,
+            };
 
             axios.post(`${API_URL}/user/registration`, data)
                 .then((response) => {

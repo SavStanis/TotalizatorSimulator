@@ -12,6 +12,7 @@ router.get('/get-info', auth.userAuthentication, userMethods.getInfo);
 router.get('/get-all-users', auth.adminAuthentication, userMethods.getAllUsers);
 router.delete('/delete', auth.userAuthentication, userMethods.deleteUserByID);
 
+router.get('/check-token', tokensMethods.checkToken);
 router.post('/refresh-tokens', tokensMethods.refreshTokens);
 
 module.exports = router;
