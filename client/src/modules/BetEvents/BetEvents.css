@@ -1,0 +1,4 @@
+.betEvents {
+    display: flex;
+    flex-direction: column;
+}
