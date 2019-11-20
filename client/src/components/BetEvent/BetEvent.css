@@ -1,0 +1,88 @@
+.betEventAnswer {
+    display: flex;
+    flex-direction: row;
+}
+
+.betEvent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    width: 95%;
+    padding: 20px;
+
+    background-color: #d6fccf;
+    border: 1px solid #2e7346;
+    border-radius: 10px;
+    margin: 20px;
+}
+.betEventInfo {
+    display: flex;
+    flex-direction: column;
+
+    margin: 5px;
+    width: 95%;
+    margin: 20px;
+}
+
+.betHeader, .questionLabel, .betEventLabel {
+    font-family: Roboto Slab;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 30px;
+    width: 100%;
+    color: #0c2412;
+}
+
+.betEventLabel {
+    border-left: 1px solid;
+    padding-left: 10px;
+}
+
+.infoRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.betHeader {
+    border-bottom: 1px solid;
+    text-align: right;
+}
+
+.betEventLink {
+    padding: 10px;
+    flex-grow: 1;
+    border: solid 1px;
+    border-radius: 5px;
+
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    font-family: Roboto Slab;
+    font-weight: bold;
+    background-color: #53a36f;
+    color: #ffffff;
+}
+
+.questionLabel {
+    font-size: 25px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#answerInfo {
+    border-top: 1px solid;
+}
+
+.finishButton {
+    font-family: Roboto Slab;
+    margin: 5px;
+    border: 1px solid #eb4034;
+    border-radius: 5px;
+    background-color: #fa8e8e;
+}
+
+.finishButton:hover {
+    cursor: pointer;
+}

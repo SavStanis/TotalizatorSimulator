@@ -58,6 +58,7 @@ class LoginForm extends Component {
                        setRefreshToken(response.data.refreshToken);
                        localStorage.setItem('login', response.data.login);
                        localStorage.setItem('email', response.data.email);
+                       localStorage.setItem('admin', response.data.admin);
                        this.setState({redirect: true});
                     }
                 })
@@ -97,10 +98,10 @@ class LoginForm extends Component {
             <div className="authContent">
                 <h1>Войдите в аккаунт</h1>
                 <form onSubmit={this.handleSubmit} action="" className="authForm">
-                    <input type="text" className="authFormElem" placeholder="Email" value={this.state.email}
+                    <input type="text" className="formTextBox" placeholder="Email" value={this.state.email}
                            onChange={this.onEmailChange} style={{borderColor: emailColor}}/>
                     <p className="error">{this.state.errors.email}</p>
-                    <input type="password" className="authFormElem" placeholder="Password" value={this.state.password}
+                    <input type="password" className="formTextBox" placeholder="Password" value={this.state.password}
                            onChange={this.onPasswordChange} style={{borderColor: passwordColor}}/>
                     <p className="error">{this.state.errors.password}</p>
                     <div className="submitButton">

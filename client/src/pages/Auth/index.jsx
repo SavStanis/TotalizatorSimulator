@@ -4,7 +4,7 @@ import {LoginForm, RegisterForm, PageHeader} from "../../modules";
 
 const Auth = () => (
     <div className="auth">
-        <PageHeader type="auth"/>
+        <PageHeader type="blank"/>
         <Switch>
             <Route  path="/login" component={LoginForm}/>
             <Route  path="/registration" component={RegisterForm}/>

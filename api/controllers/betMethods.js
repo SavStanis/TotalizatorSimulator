@@ -17,7 +17,7 @@ const createBet = async (request, responce) => {
     if(!betEvent) {
         return responce.status(400).json({message: "Invalid event!"});
     }
-    if(answerNumber !== 1 && answerNumber !== 2) {
+    if(answerNumber !== "1" && answerNumber !== "2") {
         return responce.status(400).json({message: "Invalid number of answer!"});
     }
     if(betAmount <= 0) {
@@ -33,7 +33,7 @@ const createBet = async (request, responce) => {
         answerNumber: answerNumber,
         betAmount: betAmount,
     });
-    const newAmount = user.moneyAmount - betAmount;
+    const newAmount = user.moneyAmount - parseInt(betAmount);
     await User.findByIdAndUpdate(userID,{moneyAmount: newAmount});
     await betEventMethods.updateBetEvent(eventID, answerNumber, betAmount);
     responce.status(200).json({message: "success"});

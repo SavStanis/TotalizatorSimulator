@@ -5,11 +5,11 @@ module.exports = {
         TOKEN_SECRET: 'Very Secret Word1324iuhgh122Jfj3hfi4djg5w812hg48hfl3',
         accessToken: {
             type: 'access',
-            expiresIn: '20m',
+            expiresIn: '12h',
         },
         refreshToken: {
             type: 'refresh',
-            expiresIn: '12h',
+            expiresIn: '2 days',
         }
     },
     COMMISSION: 0.05,

@@ -1,13 +1,23 @@
 import React from 'react';
-import {Link, Route, Switch} from 'react-router-dom';
-import {PageHeader} from "../../modules";
+import {Route, Switch} from 'react-router-dom';
 
-const Main = () => {
-    return (
+import {PageHeader} from '../../modules';
+import {BetEvents} from '../../modules';
+import BetForm from "../../modules/BetForm";
+
+class Main extends React.Component {
+
+
+    render() {
+        return (
         <div className="MainPage">
             <PageHeader/>
+            <Switch>
+              <Route exact path={"/"} component={BetEvents}/>
+              <Route path={"/make-a-bet/:eventID"} component={BetForm}/>
+            </Switch>
         </div>
-    );
-};
+    );}
+}
 
 export default Main;

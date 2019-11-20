@@ -55,12 +55,15 @@ const checkToken = async (request, response) => {
     if(!userToken) {
         return response.status(401).json({error: 'Token is not provided!'});
     }
+    let payload;
     userToken = userToken.replace('Bearer ', '');
     try {
-        jwt.verify(userToken, jwtConfig.TOKEN_SECRET);
+        payload = jwt.verify(userToken, jwtConfig.TOKEN_SECRET);
     } catch (e) {
         return response.status(400).json({error: 'Invalid token!'});
     }
+    if(payload.type !== 'access')
+        return response.status(400).json({error: 'Invalid token!'});
     response.status(200).json({message: "Token is valid"});
 };
 

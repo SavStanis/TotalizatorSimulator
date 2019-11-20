@@ -146,16 +146,16 @@ export default class RegisterForm extends Component {
                 <div className="authContent">
                     <h1>Регистрация аккаунта</h1>
                     <form onSubmit={this.handleSubmit} className="authForm">
-                        <input type="text" className="authFormElem" placeholder="Login" value={this.state.login}
+                        <input type="text" className="formTextBox" placeholder="Login" value={this.state.login}
                                    onChange={this.onLoginChange} style={{borderColor: loginColor}}/>
                         <p className="error">{errors.loginError}</p>
-                        <input type="text" className="authFormElem" placeholder="E-mail" value={this.state.email}
+                        <input type="text" className="formTextBox" placeholder="E-mail" value={this.state.email}
                                onChange={this.onEmailChange} style={{borderColor: emailColor}}/>
                         <p className="error">{errors.emailError}</p>
-                        <input type="password" className="authFormElem" placeholder="Password" value={this.state.password}
+                        <input type="password" className="formTextBox" placeholder="Password" value={this.state.password}
                                onChange={this.onPasswordChange} style={{borderColor: passwordColor}}/>
                         <p className="error">{errors.passwordError}</p>
-                        <input type="password" className="authFormElem" placeholder="Confirm Password" value={this.state.confirmPassword}
+                        <input type="password" className="formTextBox" placeholder="Confirm Password" value={this.state.confirmPassword}
                                onChange={this.onConfrimPasswordChange} style={{borderColor: confirmPasswordColor}}/>
                         <p className="error"/>
                         <div className="submitButton">

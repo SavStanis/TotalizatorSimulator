@@ -58,7 +58,7 @@ class Replenishment extends Component {
                 <form className="replForm" onSubmit={this.onSubmit}>
                     <input type="number" className="replFormElem" onChange={this.onAmountChange} value={this.state.amount}
                            style={{borderColor: amountColor}}/>
-                           <Button>Пополнить</Button>
+                    <Button>Пополнить</Button>
                 </form>
             </div>
         );

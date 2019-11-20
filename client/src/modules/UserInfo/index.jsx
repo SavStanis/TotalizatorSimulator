@@ -5,6 +5,7 @@ import {Link, Redirect} from 'react-router-dom';
 import {API_URL} from '../../config';
 import {getAccessToken, checkToken, deleteAccessToken, deleteRefreshToken} from '../AuthFunctions';
 import './UserInfo.css';
+import '../styles/LinksAndButtons.css';
 
 class UserInfo extends React.Component{
     constructor(props) {
@@ -38,7 +39,7 @@ class UserInfo extends React.Component{
                 deleteRefreshToken();
                 localStorage.removeItem('login');
                 localStorage.removeItem('email');
-                localStorage.removeItem('moneyAmount');
+                localStorage.removeItem('admin');
             })
         }else {
             this.setState({redirectToLogin: true});

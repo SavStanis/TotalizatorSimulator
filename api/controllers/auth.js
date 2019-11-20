@@ -19,7 +19,8 @@ const signIn = async (request, response) => {
         accessToken: tokens.accessToken,
         refreshToken: tokens.refreshToken,
         login: user.login,
-        email: user.email
+        email: user.email,
+        admin: user.isAdmin
     });
 };
 

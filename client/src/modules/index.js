@@ -3,3 +3,7 @@ export { default as RegisterForm } from "./RegisterForm";
 export { default as PageHeader } from "./PageHeader";
 export { default as UserInfo } from "./UserInfo";
 export { default as Replenishment } from "./Replenishment";
+export { default as AdminLinks } from "./AdminLinks";
+export { default as CreateEventForm } from "./CreateEventForm";
+export { default as BetEvents } from "./BetEvents";
+export { default as BetForm } from "./BetForm";

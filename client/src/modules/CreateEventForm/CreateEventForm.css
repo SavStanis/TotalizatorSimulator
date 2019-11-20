@@ -1,0 +1,12 @@
+.createEventForm {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #d6fccf;
+    border: 2px solid #2e7346;
+    border-radius: 5px;
+}
+
+#createEventTextBox {
+    margin-bottom: 20px;
+}

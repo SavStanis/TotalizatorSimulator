@@ -16,13 +16,27 @@ const createBetEvent = async (request, response) => {
         coefficient2: 1,
         amount1: 1,
         amount2: 1,
+        date: new Date().toDateString()
     });
     response.status(200).json({message: "New bet event was created."});
 };
 
 const getAllEvents = async (request, response) => {
   const events = await BetEvent.find();
-  response.status(200).json(events);
+  const data = [];
+  for(const event of events) {
+      data.push({
+          eventID: event._id,
+          question: event.question,
+          answer1: event.answer1,
+          answer2: event.answer2,
+          coefficient1: event.coefficient1,
+          coefficient2: event.coefficient2,
+          date: event.date
+      });
+  }
+  data.reverse();
+  response.status(200).json(data);
 };
 
 const finishBetEvent = async (request, response) => {
@@ -35,13 +49,13 @@ const finishBetEvent = async (request, response) => {
     if(!event) {
         return response.status(400).json({message: 'Invalid request!'});
     }
-    const coef = (answerNumber === 1) ? event.coefficient1 : event.coefficient2;
+    const coef = (answerNumber === '1') ? event.coefficient1 : event.coefficient2;
     for(let bet of bets) {
-        if(answerNumber === bet.answerNumber) {
+        if(parseInt(answerNumber) === bet.answerNumber) {
             const userID = bet.userID;
             const user = await User.findById(userID);
             let moneyAmount = user.moneyAmount;
-            moneyAmount += bet.betAmount * coef;
+            moneyAmount += (bet.betAmount * coef).toFixed(2);
             await User.findByIdAndUpdate(userID, {moneyAmount: moneyAmount});
         }
     }
@@ -71,9 +85,9 @@ const updateCoef = (amount1, amount2) => {
 
 const updateBetEvent = async (betEventID, answerNumber, betAmount) => {
     const betEvent = await BetEvent.findById(betEventID);
-    let amount1 = betEvent.amount1;
-    let amount2 = betEvent.amount2;
-    (answerNumber === 1) ? amount1 += betAmount : amount2 += betAmount;
+    let amount1 = parseInt(betEvent.amount1);
+    let amount2 = parseInt(betEvent.amount2);
+    (answerNumber === "1") ? amount1 += parseInt(betAmount) : amount2 += parseInt(betAmount);
     const {coefficient1, coefficient2} = updateCoef(amount1, amount2);
     await BetEvent.findByIdAndUpdate(betEventID, {
         amount1: amount1,
@@ -83,4 +97,20 @@ const updateBetEvent = async (betEventID, answerNumber, betAmount) => {
     });
 };
 
-module.exports = {createBetEvent, getAllEvents, finishBetEvent, updateBetEvent};
+const getEventByID = async (request, response) => {
+    const {eventID} = request.query;
+    const event = await BetEvent.findById(eventID);
+    if(!event) {
+        return response.status(404).json({message: "Event is not exist"});
+    }
+    response.status(200).json({
+        question: event.question,
+        answer1: event.answer1,
+        answer2: event.answer2,
+        coefficient1: event.coefficient1,
+        coefficient2: event.coefficient2,
+        date: event.date
+    });
+};
+
+module.exports = {createBetEvent, getAllEvents, finishBetEvent, updateBetEvent,getEventByID};
