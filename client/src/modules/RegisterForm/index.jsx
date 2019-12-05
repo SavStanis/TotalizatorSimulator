@@ -68,7 +68,7 @@ export default class RegisterForm extends Component {
         this.setState({confirmPassword: val, confirmPasswordValid: valid});
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
         if(this.state.passwordValid && this.state.loginValid && this.state.emailValid && this.state.confirmPasswordValid) {
@@ -78,15 +78,16 @@ export default class RegisterForm extends Component {
                 password: this.state.password,
             };
 
-            axios.post(`${API_URL}/user/registration`, data)
-                .then((response) => {
-                    if (response.status === 200)
-                        this.setState({redirect: true});
-                })
-                .catch((error) => {
+            try {
+                const response = await axios.post(`${API_URL}/user/registration`, data);
+                if (response.status === 200) {
+                    this.setState({redirect: true});
+                }
+            } catch (error) {
+                {
                     const errors = error.response.data.errors ? error.response.data.errors : {};
                     this.setState({errors});
-                    if(this.state.errors.login)
+                    if (this.state.errors.login) {
                         this.setState({
                             login: "",
                             loginValid: false,
@@ -95,24 +96,25 @@ export default class RegisterForm extends Component {
                             passwordValid: false,
                             confirmPasswordValid: false,
                         });
-                    if(this.state.errors.email)
-                        this.setState({
-                            email: "",
-                            emailValid: false,
-                            password: "",
-                            confirmPassword: "",
-                            passwordValid: false,
-                            confirmPasswordValid: false,
-                        });
-                    if(this.state.errors.password)
-                        this.setState({
-                            password: "",
-                            confirmPassword: "",
-                            passwordValid: false,
-                            confirmPasswordValid: false,
-                        });
-
-        })
+                    }
+                }
+            }
+            if (this.state.errors.email)
+                this.setState({
+                    email: "",
+                    emailValid: false,
+                    password: "",
+                    confirmPassword: "",
+                    passwordValid: false,
+                    confirmPasswordValid: false,
+                });
+            if (this.state.errors.password)
+                this.setState({
+                    password: "",
+                    confirmPassword: "",
+                    passwordValid: false,
+                    confirmPasswordValid: false,
+                });
         }
     };
 

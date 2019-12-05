@@ -34,7 +34,7 @@ class BetForm extends React.Component  {
 
         if(await checkToken()) {
             try {
-                const response = await axios.get(`${API_URL}/event/get-by-id`,
+                const response = await axios.get(`${API_URL}/event/byId`,
                     {
                         headers: {Authorization: headerAuth},
                         params: {eventID: this.props.match.params.eventID}
@@ -89,7 +89,7 @@ class BetForm extends React.Component  {
             };
             if(await checkToken()) {
                 try {
-                    const response = await axios.post(`${API_URL}/bet/make-a-bet`,
+                    const response = await axios.post(`${API_URL}/bet/create`,
                         data,
                         { headers: {Authorization: headerAuth}});
                     if(response.status === 200) {

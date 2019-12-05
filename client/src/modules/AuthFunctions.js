@@ -12,7 +12,7 @@ const refreshTokens = async () => {
     const refreshToken = getRefreshToken();
     let result;
     try {
-        const response = await axios.post(`${API_URL}/user/refresh-tokens`, {refreshToken: refreshToken});
+        const response = await axios.post(`${API_URL}/user/refreshTokens`, {refreshToken: refreshToken});
         if (response.status === 200) {
             setAccessToken(response.data.accessToken);
             setRefreshToken(response.data.refreshToken);
@@ -34,7 +34,7 @@ export const checkToken = async () => {
     let headerAuth = "Bearer " + getAccessToken();
     let needToRefresh = false;
     try {
-        await axios.get(`${API_URL}/user/check-token`, { headers: { Authorization: headerAuth } })
+        await axios.get(`${API_URL}/user/checkToken`, { headers: { Authorization: headerAuth } })
     } catch(error) {
         console.log(error);
         needToRefresh = true;

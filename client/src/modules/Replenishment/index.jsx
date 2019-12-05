@@ -33,9 +33,9 @@ class Replenishment extends Component {
             if(await checkToken()){
                 let headerAuth = "Bearer " + getAccessToken();
                 await axios.post(
-                    `${API_URL}/user/balance-replenishment`, data,
+                    `${API_URL}/user/replenishment`, data,
                     {headers: {Authorization: headerAuth}}
-                ).then().catch();
+                );
             }else {
                 this.setState({redirectToLogin: true});
             }

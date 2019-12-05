@@ -61,19 +61,20 @@ export default class CreateEventForm extends React.Component {
             if(await checkToken()) {
                 let headerAuth = "Bearer " + getAccessToken();
 
-                axios.post(`${API_URL}/event/create`, data,
-                    {headers: {Authorization: headerAuth}}
-                    ).then( (response) => {
-                        if(response.status === 200)
-                            this.setState({redirect: true});
-                    }).catch((error) => {
+                try {
+                    const response = axios.post(`${API_URL}/event/create`, data,
+                        {headers: {Authorization: headerAuth}}
+                    );
+                    if (response.status === 200)
+                        this.setState({redirect: true});
+                } catch(error) {
                     deleteAccessToken();
                     deleteRefreshToken();
                     localStorage.removeItem('login');
                     localStorage.removeItem('email');
                     localStorage.removeItem('admin');
                     this.setState({redirect: true});
-                    });
+                    }
             }
         }
     };

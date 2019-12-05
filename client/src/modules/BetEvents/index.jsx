@@ -13,7 +13,7 @@ class BetEvents extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`${API_URL}/event/get-events`)
+        axios.get(`${API_URL}/event/events`)
             .then((response) => {
                 if(response.status === 200) {
                     this.setState({

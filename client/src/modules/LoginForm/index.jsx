@@ -43,7 +43,7 @@ class LoginForm extends Component {
         this.setState({password: val, passwordValid: valid});
     };
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
 
         if(this.state.emailValid && this.state.passwordValid) {
@@ -51,37 +51,37 @@ class LoginForm extends Component {
               email: this.state.email,
               password: this.state.password
             };
-            axios.post(`${API_URL}/user/login`, data)
-                .then(response => {
-                    if(response.status === 200) {
-                       setAccessToken(response.data.accessToken);
-                       setRefreshToken(response.data.refreshToken);
-                       localStorage.setItem('login', response.data.login);
-                       localStorage.setItem('email', response.data.email);
-                       localStorage.setItem('admin', response.data.admin);
-                       this.setState({redirect: true});
-                    }
-                })
-                .catch(error => {
-                    const errors = error.response.data.errors ? error.response.data.errors : {};
-                    this.setState({errors});
-                    if (this.state.errors.email) {
-                        this.setState({
-                                email: "",
-                                password: "",
-                                emailValid: false,
-                                passwordValid: false,
-                            }
-                        )
-                    }
-                    if (this.state.errors.password) {
-                        this.setState({
-                                password: "",
-                                passwordValid: false,
-                            }
-                        )
-                    }
-                })
+
+            try {
+                const response =  axios.post(`${API_URL}/user/login`, data);
+                if(response.status === 200) {
+                    setAccessToken(response.data.accessToken);
+                    setRefreshToken(response.data.refreshToken);
+                    localStorage.setItem('login', response.data.login);
+                    localStorage.setItem('email', response.data.email);
+                    localStorage.setItem('admin', response.data.admin);
+                    this.setState({redirect: true});
+                }
+            }catch(error) {
+                const errors = error.response.data.errors ? error.response.data.errors : {};
+                this.setState({errors});
+                if (this.state.errors.email) {
+                    this.setState({
+                            email: "",
+                            password: "",
+                            emailValid: false,
+                            passwordValid: false,
+                        }
+                    )
+                }
+                if (this.state.errors.password) {
+                    this.setState({
+                            password: "",
+                            passwordValid: false,
+                        }
+                    )
+                }
+            }
         }
     };
 

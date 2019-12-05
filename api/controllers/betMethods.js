@@ -33,7 +33,7 @@ const createBet = async (request, responce) => {
         answerNumber: answerNumber,
         betAmount: betAmount,
     });
-    const newAmount = user.moneyAmount - parseInt(betAmount);
+    const newAmount = user.moneyAmount - parseFloat(betAmount);
     await User.findByIdAndUpdate(userID,{moneyAmount: newAmount});
     await betEventMethods.updateBetEvent(eventID, answerNumber, betAmount);
     responce.status(200).json({message: "success"});

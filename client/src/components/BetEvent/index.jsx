@@ -26,20 +26,21 @@ class BetEvent extends React.Component  {
         if(await checkToken()) {
             let headerAuth = "Bearer " + getAccessToken();
 
-            await axios.delete(`${API_URL}/event/finish-event`,
-                {
-                    headers: {Authorization: headerAuth},
-                    data: data
-                }
-            ).then( (response) => {
-            }).catch((error) => {
+            try {
+                await axios.delete(`${API_URL}/event/finish`,
+                    {
+                        headers: {Authorization: headerAuth},
+                        data: data
+                    }
+                );
+            } catch(error)  {
                 console.log(error);
                 deleteAccessToken();
                 deleteRefreshToken();
                 localStorage.removeItem('login');
                 localStorage.removeItem('email');
                 localStorage.removeItem('admin');
-            });
+            }
         }
         window.location.reload();
     };

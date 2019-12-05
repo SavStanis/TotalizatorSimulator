@@ -7,7 +7,6 @@ const registerUser = async (request, response) => {
     const {email, login, password} = request.body;
     const user = await User.findOne({email: email});
     if(user) {
-        //console.log("Someone's trying to register account using E-mail that's existed in db.");
         return response.status(400).json({errors: {email: "This email is already registered!"}});
     }
     if(!email || !login || !password) {
@@ -47,7 +46,7 @@ const balanceReplenishment = async (request, response) => {
     if(moneyAmount <= 0) {
         return response.status(400).json({message: "Invalid money amount!"});
     }
-    const newAmount = parseInt(moneyAmount) + user.moneyAmount;
+    const newAmount = parseFloat(moneyAmount) + user.moneyAmount;
     await User.findByIdAndUpdate(userID, {moneyAmount: newAmount});
     response.status(200).json({message: "success"});
 };

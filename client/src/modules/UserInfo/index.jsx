@@ -22,9 +22,10 @@ class UserInfo extends React.Component{
     async componentDidMount() {
         if(await checkToken()){
             let headerAuth = "Bearer " + getAccessToken();
-            await axios.get(
-                `${API_URL}/user/get-info`,
-                {headers: {Authorization: headerAuth}}
+            try {
+                const response = await axios.get(
+                    `${API_URL}/user/info`,
+                    {headers: {Authorization: headerAuth}}
                 ).then((response) => {
                     if(response.status === 200) {
                         this.setState({
@@ -33,14 +34,15 @@ class UserInfo extends React.Component{
                             moneyAmount: response.data.moneyAmount
                         });
                     }
-                }).catch((error) => {
+                });
+            } catch(error) {
                 this.setState({redirectToLogin: true});
                 deleteAccessToken();
                 deleteRefreshToken();
                 localStorage.removeItem('login');
                 localStorage.removeItem('email');
                 localStorage.removeItem('admin');
-            })
+            }
         }else {
             this.setState({redirectToLogin: true});
         }

@@ -7,12 +7,12 @@ const tokensMethods = require('../controllers/tokensMethods');
 
 router.post('/registration', userMethods.registerUser);
 router.post('/login', auth.signIn);
-router.post('/balance-replenishment', auth.userAuthentication, userMethods.balanceReplenishment);
-router.get('/get-info', auth.userAuthentication, userMethods.getInfo);
-router.get('/get-all-users', auth.adminAuthentication, userMethods.getAllUsers);
+router.post('/replenishment', auth.userAuthentication, userMethods.balanceReplenishment);
+router.get('/info', auth.userAuthentication, userMethods.getInfo);
+router.get('/allUsers', auth.adminAuthentication, userMethods.getAllUsers);
 router.delete('/delete', auth.userAuthentication, userMethods.deleteUserByID);
 
-router.get('/check-token', tokensMethods.checkToken);
-router.post('/refresh-tokens', tokensMethods.refreshTokens);
+router.get('/checkToken', tokensMethods.checkToken);
+router.post('/refreshTokens', tokensMethods.refreshTokens);
 
 module.exports = router;

@@ -55,7 +55,8 @@ const finishBetEvent = async (request, response) => {
             const userID = bet.userID;
             const user = await User.findById(userID);
             let moneyAmount = user.moneyAmount;
-            moneyAmount += (bet.betAmount * coef).toFixed(2);
+            moneyAmount += (bet.betAmount * coef);
+            Math.floor(moneyAmount);
             await User.findByIdAndUpdate(userID, {moneyAmount: moneyAmount});
         }
     }
@@ -71,23 +72,23 @@ const updateCoef = (amount1, amount2) => {
   if(coefficient1 < 1) {
       coefficient1 = 1;
   }
-    if(coefficient2 < 1) {
-        coefficient2 = 1;
-    }
-    if(coefficient1 > 50) {
-        coefficient1 = 50;
-    }
-    if(coefficient2 > 50) {
-        coefficient2 = 50;
-    }
+  if(coefficient2 < 1) {
+      coefficient2 = 1;
+  }
+  if(coefficient1 > 50) {
+      coefficient1 = 50;
+  }
+  if(coefficient2 > 50) {
+      coefficient2 = 50;
+  }
   return {coefficient1, coefficient2};
 };
 
 const updateBetEvent = async (betEventID, answerNumber, betAmount) => {
     const betEvent = await BetEvent.findById(betEventID);
-    let amount1 = parseInt(betEvent.amount1);
-    let amount2 = parseInt(betEvent.amount2);
-    (answerNumber === "1") ? amount1 += parseInt(betAmount) : amount2 += parseInt(betAmount);
+    let amount1 = parseFloat(betEvent.amount1);
+    let amount2 = parseFloat(betEvent.amount2);
+    (answerNumber === "1") ? amount1 += parseFloat(betAmount) : amount2 += parseFloat(betAmount);
     const {coefficient1, coefficient2} = updateCoef(amount1, amount2);
     await BetEvent.findByIdAndUpdate(betEventID, {
         amount1: amount1,
