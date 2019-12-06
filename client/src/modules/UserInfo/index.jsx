@@ -26,15 +26,14 @@ class UserInfo extends React.Component{
                 const response = await axios.get(
                     `${API_URL}/user/info`,
                     {headers: {Authorization: headerAuth}}
-                ).then((response) => {
-                    if(response.status === 200) {
-                        this.setState({
-                            login: response.data.login,
-                            email: response.data.email,
-                            moneyAmount: response.data.moneyAmount
-                        });
-                    }
-                });
+                );
+                if(response.status === 200) {
+                    this.setState({
+                        login: response.data.login,
+                        email: response.data.email,
+                        moneyAmount: response.data.moneyAmount
+                    });
+                }
             } catch(error) {
                 this.setState({redirectToLogin: true});
                 deleteAccessToken();
@@ -65,8 +64,8 @@ class UserInfo extends React.Component{
                     <div className="infoLabel">Ballance: {this.state.moneyAmount}</div>
                 </div>
                 <div className="infoButtons">
-                    <Link className="infoLink" to="/user/replenishment">Пополнить счёт</Link>
-                    <Link className="infoLink" to="">Поменять пароль</Link>
+                    <Link className="infoLink" to="/user/replenishment">Replenish</Link>
+                    <Link className="infoLink" to="/user/messages">My messages</Link>
                 </div>
             </div>
         </div>

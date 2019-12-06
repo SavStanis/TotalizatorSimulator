@@ -6,4 +6,4 @@ export { default as Replenishment } from "./Replenishment";
 export { default as AdminLinks } from "./AdminLinks";
 export { default as CreateEventForm } from "./CreateEventForm";
 export { default as BetEvents } from "./BetEvents";
-export { default as BetForm } from "./BetForm";
+export { default as Messages } from "./Messages";

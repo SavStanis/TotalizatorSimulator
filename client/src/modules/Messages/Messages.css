@@ -1,0 +1,43 @@
+.messageList {
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    font-size: 18px;
+    background-color: #d6fccf;
+}
+
+.returnLink {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    margin: 10px;
+    width: 50px;
+    text-align: center;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: #d6fccf;
+}
+
+.messageHeader {
+    width: 100%;
+    text-align: right;
+    border-bottom: 1px solid black;
+}
+
+.mainText {
+    width: 100%;
+    padding: 10px;
+    text-align: left;
+}
