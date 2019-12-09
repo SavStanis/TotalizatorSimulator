@@ -62,7 +62,7 @@ export default class CreateEventForm extends React.Component {
                 let headerAuth = "Bearer " + getAccessToken();
 
                 try {
-                    const response = axios.post(`${API_URL}/event/create`, data,
+                    const response = await axios.post(`${API_URL}/event/create`, data,
                         {headers: {Authorization: headerAuth}}
                     );
                     if (response.status === 200)

@@ -53,7 +53,7 @@ class LoginForm extends Component {
             };
 
             try {
-                const response =  axios.post(`${API_URL}/user/login`, data);
+                const response =  await axios.post(`${API_URL}/user/login`, data);
                 if(response.status === 200) {
                     setAccessToken(response.data.accessToken);
                     setRefreshToken(response.data.refreshToken);

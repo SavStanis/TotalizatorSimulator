@@ -1,6 +1,7 @@
 const BetEvent = require('../models/betEvent');
 const Bet = require('../models/bet');
 const User = require('../models/user');
+const Message = require('../models/messages');
 const COMMISSION = require('../config/app').COMMISSION;
 
 const createBetEvent = async (request, response) => {
@@ -55,9 +56,25 @@ const finishBetEvent = async (request, response) => {
             const userID = bet.userID;
             const user = await User.findById(userID);
             let moneyAmount = user.moneyAmount;
+            console.log({moneyAmount});
+            console.log(user.moneyAmount);
+            console.log(bet.betAmount);
             moneyAmount += (bet.betAmount * coef);
+            console.log({moneyAmount});
             Math.floor(moneyAmount);
             await User.findByIdAndUpdate(userID, {moneyAmount: moneyAmount});
+            await Message.create({
+                userID: userID,
+                date: new Date().toDateString(),
+                mainText: `congratulations! You put ${bet.betAmount} and you won ${bet.betAmount * coef}!`
+            })
+        }
+        else {
+            await Message.create({
+                userID: bet.userID,
+                date: new Date().toDateString(),
+                mainText: `Unfortunatly you've lost ${bet.betAmount.toFixed(2)}!`
+            })
         }
     }
     await Bet.deleteMany({betEventID: eventID});

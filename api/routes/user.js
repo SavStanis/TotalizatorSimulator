@@ -15,4 +15,6 @@ router.delete('/delete', auth.userAuthentication, userMethods.deleteUserByID);
 router.get('/checkToken', tokensMethods.checkToken);
 router.post('/refreshTokens', tokensMethods.refreshTokens);
 
+router.get('/messages', auth.userAuthentication, userMethods.getMessages);
+
 module.exports = router;

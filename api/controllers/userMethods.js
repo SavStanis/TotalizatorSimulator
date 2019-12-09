@@ -1,6 +1,7 @@
 const randomstring = require('randomstring');
 const User = require('../models/user');
 const Token = require('../models/token');
+const Message = require('../models/messages');
 const crypto = require('crypto');
 
 const registerUser = async (request, response) => {
@@ -48,6 +49,12 @@ const balanceReplenishment = async (request, response) => {
     }
     const newAmount = parseFloat(moneyAmount) + user.moneyAmount;
     await User.findByIdAndUpdate(userID, {moneyAmount: newAmount});
+    await Message.create({
+        userID: userID,
+        mainText: `You replenished your balance by ${moneyAmount}`,
+        date: new Date().toDateString()
+    });
+
     response.status(200).json({message: "success"});
 };
 
@@ -65,4 +72,10 @@ const getInfo = async (request, response) => {
     response.status(200).json(userData);
 };
 
-module.exports = {registerUser, getAllUsers, deleteUserByID, balanceReplenishment, getInfo};
+const getMessages = async (request, response) => {
+    const {userID} = request.body;
+    const messages = await Message.find({userID: userID});
+    response.status(200).json(messages);
+};
+
+module.exports = {registerUser, getAllUsers, deleteUserByID, balanceReplenishment, getInfo, getMessages};
