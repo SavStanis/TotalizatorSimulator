@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import "./Messages.css";
 import {checkToken, getAccessToken} from "../AuthFunctions";
 import {API_URL} from "../../config";
 import {Link} from "react-router-dom";
+
+import "./Messages.css";
+import "../styles/LinksAndButtons.css"
 
 class Messages extends Component {
     constructor(props) {

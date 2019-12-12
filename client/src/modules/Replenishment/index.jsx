@@ -2,10 +2,12 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 import {Button} from "../../components";
-import './Replenishment.css'
 import {checkToken, getAccessToken} from "../AuthFunctions";
 import {API_URL} from "../../config";
 import {Redirect} from "react-router";
+
+import './Replenishment.css'
+import '../styles/LinksAndButtons.css'
 
 class Replenishment extends Component {
     constructor(props) {

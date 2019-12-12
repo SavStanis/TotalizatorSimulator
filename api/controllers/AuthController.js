@@ -2,7 +2,9 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const TOKEN_SECRET = require('../config/app').jwtConfig.TOKEN_SECRET;
-const tokenMethods = require('./tokensMethods');
+
+const TokenController = require('../controllers/TokenController');
+const Token = new TokenController();
 
 class AuthController {
     signIn = async (request, response) => {
@@ -15,7 +17,7 @@ class AuthController {
         const salt = user.salt;
         if(crypto.createHash('sha256').update(password + salt).digest('base64') !== user.passwordHash)
             return response.status(400).json({errors: {password: 'Wrong password!'}});
-        const tokens = await tokenMethods.updateTokens(user._id);
+        const tokens = await Token.updateTokens(user._id);
         response.status(200).json({
             accessToken: tokens.accessToken,
             refreshToken: tokens.refreshToken,

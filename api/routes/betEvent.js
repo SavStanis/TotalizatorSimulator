@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 
-const auth = require('../controllers/auth');
-const betEventMethods = require('../controllers/betEventMethods');
+const AuthController = require('../controllers/AuthController');
+const Auth = new AuthController();
 
-router.post('/create', auth.adminAuthentication, betEventMethods.createBetEvent);
-router.get('/events', betEventMethods.getAllEvents);
-router.get('/byId', auth.userAuthentication, betEventMethods.getEventByID);
-router.delete('/finish', auth.adminAuthentication, betEventMethods.finishBetEvent);
+const BetEventController = require('../controllers/BetEventController');
+const BetEvent = new BetEventController();
+
+router.post('/create', Auth.adminAuthentication, BetEvent.createBetEvent);
+router.get('/events', BetEvent.getAllEvents);
+router.get('/byId', Auth.userAuthentication, BetEvent.getEventByID);
+router.delete('/finish', Auth.adminAuthentication, BetEvent.finishBetEvent);
 
 module.exports = router;
