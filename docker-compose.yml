@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "3001:3001"
+    depends_on:
+      - db
+    container_name: ts-api
+
+  client:
+    build: ./client
+    ports:
+      - "3000:80"
+    container_name: ts-client
+
+  db:
+    image: mongo
+    ports:
+      - "3002:27017"
+    container_name: ts-db

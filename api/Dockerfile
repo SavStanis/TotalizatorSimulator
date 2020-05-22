@@ -1,8 +1,9 @@
-FROM node:13.14.0-alpine
-WORKDIR /api
-COPY package*.json /api/
+FROM node:13-alpine as builder
+WORKDIR /app
+COPY package*.json /app/
 RUN npm install
-COPY . /api/
-EXPOSE 80
+COPY . /app
+
+EXPOSE 3001
 CMD ["npm", "start"]
 

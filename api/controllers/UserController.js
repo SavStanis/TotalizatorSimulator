@@ -27,6 +27,20 @@ class UserController {
         response.status(200).json({message: 'success'});
     };
 
+    createBasicAdmin = () => {
+        const basicAdminOptions = require('../config/app').basicAdmin;
+        const salt = randomstring.generate();
+        const passwordHash = crypto.createHash('sha256').update(basicAdminOptions.PASSWORD + salt).digest('base64');
+        User.create({
+            email: basicAdminOptions.EMAIL,
+            login: basicAdminOptions.LOGIN,
+            passwordHash: passwordHash,
+            salt: salt,
+            moneyAmount: 0,
+            isAdmin: true,
+        });
+    };
+
     getAllUsers = async (request, response) => {
         const users = await User.find();
         response.status(200).json(users);

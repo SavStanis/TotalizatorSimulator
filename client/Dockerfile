@@ -1,7 +1,13 @@
-FROM node:13.14.0-alpine
-WORKDIR /client
-COPY package*.json /client/
+FROM node:13-alpine as builder
+
+WORKDIR /app
+COPY package*.json /app/
 RUN npm install
-COPY . /client/
-EXPOSE 3001
-CMD ["npm", "start"]
+COPY . /app
+RUN npm run build
+
+FROM nginx:1.18.0-alpine
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
