@@ -57,11 +57,7 @@ class BetEventController {
                 const userID = bet.userID;
                 const user = await User.findById(userID);
                 let moneyAmount = user.moneyAmount;
-                console.log({moneyAmount});
-                console.log(user.moneyAmount);
-                console.log(bet.betAmount);
                 moneyAmount += (bet.betAmount * coef);
-                console.log({moneyAmount});
                 Math.floor(moneyAmount);
                 await User.findByIdAndUpdate(userID, {moneyAmount: moneyAmount});
                 await Message.create({

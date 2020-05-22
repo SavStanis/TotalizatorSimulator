@@ -27,18 +27,25 @@ class UserController {
         response.status(200).json({message: 'success'});
     };
 
-    createBasicAdmin = () => {
-        const basicAdminOptions = require('../config/app').basicAdmin;
+    createBasicAdminIfNotExists = async () => {
+        const basicAdminOptions = require('../config/app').basicAdminConfig;
         const salt = randomstring.generate();
         const passwordHash = crypto.createHash('sha256').update(basicAdminOptions.PASSWORD + salt).digest('base64');
-        User.create({
-            email: basicAdminOptions.EMAIL,
-            login: basicAdminOptions.LOGIN,
-            passwordHash: passwordHash,
-            salt: salt,
-            moneyAmount: 0,
-            isAdmin: true,
-        });
+
+        if (!(await this.isPresentAdmin())) {
+            await User.create({
+                email: basicAdminOptions.EMAIL,
+                login: basicAdminOptions.LOGIN,
+                passwordHash: passwordHash,
+                salt: salt,
+                moneyAmount: 0,
+                isAdmin: true,
+            });
+        }
+    };
+
+    isPresentAdmin = async () => {
+        return (await User.count({isAdmin: "true"}) > 0);
     };
 
     getAllUsers = async (request, response) => {

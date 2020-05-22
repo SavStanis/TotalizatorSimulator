@@ -17,6 +17,6 @@ services:
 
   db:
     image: mongo
-    ports:
-      - "3002:27017"
+    volumes:
+      - ./mongodb/mongo-volume:/data/db
     container_name: ts-db
