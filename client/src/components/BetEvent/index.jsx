@@ -75,7 +75,7 @@ class BetEvent extends React.Component  {
                         <div className="betEventLabel">{this.props.coefficient2}</div>
                     </div>
                 </div>
-                <Link className="betEventLink" to={`/make-a-bet/${this.state.eventID}`}>Make a bet</Link>
+                <Link className="betEventLink" to={`/events/${this.state.eventID}`}>Make a bet</Link>
             </div>
         )
     };

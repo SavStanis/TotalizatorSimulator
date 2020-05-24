@@ -43,7 +43,7 @@ const PageHeader = (props) => {
         <div className="pageHeader">
             <div className="pageHeaderText">Totalizator Simulator</div>
             <Link class="signIn" to="/login">Sign in</Link>
-            <Link class="signUp" to="/registration">Sign up</Link>
+            <Link class="signUp" to="/register">Sign up</Link>
         </div>
     );
 };

@@ -14,7 +14,7 @@ class Main extends React.Component {
             <PageHeader/>
             <Switch>
               <Route exact path={"/"} component={BetEvents}/>
-              <Route path={"/make-a-bet/:eventID"} component={BetForm}/>
+              <Route path={"/events/:eventID"} component={BetForm}/>
             </Switch>
         </div>
     );}

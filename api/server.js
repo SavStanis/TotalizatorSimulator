@@ -34,7 +34,7 @@ app.use('/bet', routesBet);
 
 const User = (new (require('./controllers/UserController'))());
 User.createBasicAdminIfNotExists().then().catch(err => console.log(err));
-s
+
 app.listen(config.API_PORT);
 
 module.exports = app;

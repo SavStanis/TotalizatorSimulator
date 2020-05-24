@@ -8,8 +8,8 @@ class App extends Component {
             <div className="wrapper">
                 <Switch>
                     <Route exact path={"/"} component={Main}/>
-                    <Route path={"/make-a-bet/:eventID"} component={Main}/>
-                    <Route path={["/login", "/registration"]} component={Auth}/>
+                    <Route path={"/events/:eventID"} component={Main}/>
+                    <Route path={["/login", "/register"]} component={Auth}/>
                     <Route path={"/user"} component={User}/>
                     <Route path={"/admin"} component={Admin}/>
                 </Switch>

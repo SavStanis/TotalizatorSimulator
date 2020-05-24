@@ -7,7 +7,7 @@ const Auth = () => (
         <PageHeader type="blank"/>
         <Switch>
             <Route  path="/login" component={LoginForm}/>
-            <Route  path="/registration" component={RegisterForm}/>
+            <Route  path="/register" component={RegisterForm}/>
         </Switch>
     </div>
 );

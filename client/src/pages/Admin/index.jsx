@@ -9,7 +9,7 @@ const Admin = () => {
             <PageHeader type="blank"/>
             <Switch>
                 <Route  exact path="/admin" component={AdminLinks}/>
-                <Route  exact path="/admin/create-event" component={CreateEventForm}/>
+                <Route  exact path="/admin/events/new" component={CreateEventForm}/>
             </Switch>
         </div>
     );

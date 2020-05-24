@@ -107,7 +107,7 @@ class LoginForm extends Component {
                     <div className="submitButton">
                         <Button>Войти</Button>
                     </div>
-                    <Link className="authLink" to="/registration">Зарегистрироваться</Link>
+                    <Link className="authLink" to="/register">Зарегистрироваться</Link>
                 </form>
             </div>
         );
